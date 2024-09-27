@@ -1,0 +1,8 @@
+#footer-container {
+    width: 100vw;
+    text-align: center;
+}
+
+#footer-container > p {
+    color: darkblue;
+}

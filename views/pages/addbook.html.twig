@@ -1,0 +1,40 @@
+{% extends "../layouts/base.html.twig" %}
+
+{% block style %}
+	{{ parent() }}
+	<link rel="stylesheet" href="/assets/css/addbook.css">
+{% endblock %}
+
+{% block title %}
+	<title>{{title}}</title>
+{% endblock %}
+
+{% block main %}
+	<main>
+		<section id="addbook-section">
+			<div>
+				{% if book %}
+					<h2 id="addbook-title">Modifier un livre</h2>
+				{% else %}
+					<h2 id="addbook-title">Ajouter un livre</h2>
+				{% endif %}
+			</div>
+			{% if error %}
+				<p class="error">{{error}}</p>
+			{% endif %}
+			<form {% if book %} action="/updateBook/{{book.id}}" {% else %} action="/addbook" {% endif %} method="POST">
+				<div class="inputs">
+					<label for='title'>Titre:</label>
+					<input type="text" name="title" value={{book.title}}>
+				</div>
+				<div class="inputs">
+					<label for="author">Auteur:</label>
+					<input type="text" name="author" value={{book.author}}>
+				</div>
+				<div class="inputs submit-btn">
+					<button type="submit">Envoyer</button>
+				</div>
+			</form>
+		</section>
+	</main>
+{% endblock %}

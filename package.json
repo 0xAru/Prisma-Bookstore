@@ -1,0 +1,19 @@
+{
+  "name": "application_monobloc_express_prisma_twig",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lola",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "bcrypt": "^5.1.1",
+    "express": "^4.21.0",
+    "express-session": "^1.18.0",
+    "prisma": "^5.20.0",
+    "twig": "^1.17.1"
+  }
+}

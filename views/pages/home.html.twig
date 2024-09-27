@@ -1,0 +1,18 @@
+{% extends '../layouts/base.html.twig'%}
+
+{% block style %}
+	{{ parent() }}
+	<link rel="stylesheet" href="./assets/css/home.css">
+{% endblock %}
+
+{% block title %}
+	<title>{{title}}</title>
+{% endblock %}
+
+{% block main %}
+    <main>
+        <section id="home-section">
+            <h1 id="home-title">Bookstore Homepage</h1>
+        </section>
+    </main>
+{% endblock %}

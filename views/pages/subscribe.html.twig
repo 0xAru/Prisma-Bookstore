@@ -1,0 +1,50 @@
+{% extends "../layouts/base.html.twig" %}
+
+{% block style %}
+ {{ parent() }}
+    <link rel="stylesheet" href="./assets/css/subscribe.css">
+{% endblock %}
+
+{% block title %}
+    <title>{{title}}</title>
+{% endblock %}
+
+{% block main %}
+    <main>
+        <section id="subscribe-section">
+            <div id="subscribe-title">
+                <h2>Inscription</h2>
+            </div>
+            <div>
+                <form action="./subscribe", method="POST">
+                    <div class="inputs">
+                        <label for="lastName">Nom: </label>
+                        <input id="lastName" type="text" name="lastName">
+                    </div>
+                    <div class="inputs">
+                        <label for="firstName">Prénom: </label>
+                        <input id="firstName" type="text" name="firstName">
+                    </div>
+                    <div class="inputs">
+                        <label for="email">Email: </label>
+                        <input id="email" type="text" name="email">
+                    </div>
+                    <div class="inputs">
+                        <label for="password">Mot de passe:</label>
+                        <input id="password" type="password" name="password">
+                    </div>
+                    <div class="inputs">
+                        <label for="confirmPassword">Confirmation du mot de passe:</label>
+                        <input id="confirmPassword" type="password" name="confirmPassword">
+                    </div>
+                    {% if error %}
+                    <p class="error">{{error.confirmPassword}}</p>
+                    {% endif %}
+                    <div class="inputs submit-btn">
+                        <button type="submit">Envoyer</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+{% endblock %}

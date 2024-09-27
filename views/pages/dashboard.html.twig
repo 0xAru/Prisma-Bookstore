@@ -1,0 +1,103 @@
+{% extends "../layouts/base.html.twig" %}
+
+{% block style %}
+	{{ parent() }}
+	<link rel="stylesheet" href="./assets/css/dashboard.css">
+{% endblock %}
+
+{% block title %}
+	<title>{{title}}</title>
+{% endblock %}
+
+{% block main %}
+	<main>
+		<section id="dashboard-section">
+			<div>
+				<h1 id="dashboard-title">Tableau de bord</h1>
+			</div>
+            <div id="statusMessage"></div>
+			<div id="book-container">
+				{% for book in user.books %}
+					<div class="book-card">
+						<i class="bi bi-trash3 trash" data-book-id="{{book.id}}"></i>
+						<h3>{{ book.title }}</h3>
+						<p>Auteur:{{ book.author }}</p>
+						<a href="/updateBook/{{book.id}}" class="update-btn">Modifier</a>
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+	</main>
+	<div id="deleteModal" class="modal hidden">
+		<div class="modal-content">
+			<p>Voulez-vous vraiment supprimer ce livre ?</p>
+			<button type="submit" id="confirmDelete" class="confirm-btn">Supprimer</button>
+			<button id="cancelDelete" class="cancel-btn">Annuler</button>
+		</div>
+	</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let trashIcons = document.querySelectorAll('.trash');
+        let deleteModal = document.getElementById('deleteModal');
+        let confirmDelete = document.getElementById('confirmDelete');
+        let cancelDelete = document.getElementById('cancelDelete');
+        let selectedBookId = null; // Pour stocker l'ID du livre sélectionné
+
+        trashIcons.forEach(function(trashIcon) {
+            trashIcon.addEventListener('click', function() {
+                // Récupère l'ID du livre depuis l'attribut data-book-id
+                selectedBookId = this.getAttribute('data-book-id');
+                
+                // Ouvre la modale
+                deleteModal.classList.remove('hidden');
+            });
+        });
+
+        // Ferme la modale si on clique sur "Annuler"
+        cancelDelete.addEventListener('click', function() {
+            deleteModal.classList.add('hidden');
+            selectedBookId = null; // Réinitialise l'ID sélectionné
+        });
+
+        // Quand l'utilisateur confirme la suppression
+        confirmDelete.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (selectedBookId) {
+                console.log(selectedBookId);
+                fetch(`/deleteBook/${selectedBookId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ bookId: selectedBookId })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        let bookCard = document.querySelector(`.trash[data-book-id="${selectedBookId}"]`).parentElement;
+                        bookCard.remove();
+
+                        statusMessage.textContent = 'Livre supprimé avec succès';
+                        statusMessage.style.display = 'block';
+                    } else {
+                        statusMessage.textContent = 'Erreur lors de la suppression';
+                        statusMessage.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur :', error);
+                    statusMessage.textContent = 'Une erreur est survenue';
+                    statusMessage.style.display = 'block';
+                })
+                .finally(() => {
+                    deleteModal.classList.add('hidden');
+                    selectedBookId = null;
+                });
+            }
+        });
+    });
+</script>
+{% endblock %}
+

@@ -1,0 +1,30 @@
+{% block style %}
+	<link rel="stylesheet" href="/assets/css/header.css">
+{% endblock %}
+
+<header>
+	<div>
+		<a href="/">
+			<img src="/assets/images/logo.svg" alt="logo" id="logo">
+		</a>
+	</div>
+	<nav>
+		<ul id="nav-links">
+			{% if user.id %}
+				<li class="nav-link">
+					<a href="/addbook">Ajouter un livre</a>
+				</li>
+				<li class="nav-link">
+					<a href="/logout">Déconnexion</a>
+				</li>
+			{% else %}
+				<li class="nav-link">
+					<a href="/subscribe">Inscription</a>
+				</li>
+				<li class="nav-link">
+					<a href="/login">Connexion</a>
+				</li>
+			{% endif %}
+		</ul>
+	</nav>
+</header>

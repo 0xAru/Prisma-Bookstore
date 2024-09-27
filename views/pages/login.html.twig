@@ -1,0 +1,41 @@
+{% extends "../layouts/base.html.twig" %}
+
+{% block style %}
+	{{ parent() }}
+	<link rel="stylesheet" href="./assets/css/login.css">
+{% endblock %}
+
+{% block title %}
+	<title>{{title}}</title>
+{% endblock %}
+
+{% block main %}
+	<main>
+		<section id="login-section">
+			<div id="login-title">
+				<h2>Connexion</h2>
+			</div>
+			<div>
+				<form action="./login" , method="POST">
+					<div class="inputs">
+						<label for="email">Email:</label>
+						<input id="email" type="text" name="email">
+					</div>
+                    {% if error %}
+						<p class="error">{{error.email}}</p>
+					{% endif %}
+					<div class="inputs">
+						<label for="password">Mot de passe:</label>
+						<input id="password" type="password" name="password">
+					</div>
+					{% if error %}
+						<p class="error">{{error.password}}</p>
+					{% endif %}
+					<div class="inputs submit-btn">
+						<button type="submit">Envoyer</button>
+					</div>
+				</form>
+			</div>
+		</section>
+	</main>
+{% endblock %}

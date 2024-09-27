@@ -1,0 +1,72 @@
+#dashboard-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#dashboard-title {
+    margin-top: 2rem;
+    color: darkblue;
+}
+
+#book-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+    margin-top: 1rem
+}
+
+.book-card {
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 4px gray;
+    width: 15%;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.book-card > h3 {
+    text-decoration: underline;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.trash {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+    text-align: center;
+}
+
+.confirm-btn, .cancel-btn, .update-btn {
+    margin: 10px;
+    padding: 10px;
+}
+
+#statusMessage {
+    margin-top: 1rem;
+    display: none;
+    color: green;
+}
